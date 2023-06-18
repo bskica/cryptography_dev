@@ -1,1 +1,1 @@
-#add_subdirectory("placeholder")
+add_subdirectory("string_ops")

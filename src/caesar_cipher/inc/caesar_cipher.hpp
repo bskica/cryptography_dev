@@ -11,13 +11,12 @@ class EncryptCaesar {
         EncryptCaesar(std::string key, std::string plain_text); // Constructor
         ~EncryptCaesar(); // Destructor
 
-       std::string encrypt(const std::string &plain_text);     
-       std::string decrypt(const std::string &user_key);
-        
+        void encrypt(const std::string &plain_text);     
+        void decrypt(const std::string &user_key);
 
     private:
-        std::string key;
-        std::string 
+        std::string key_;
+        std::string plain_text_;
     };
 
 #endif
