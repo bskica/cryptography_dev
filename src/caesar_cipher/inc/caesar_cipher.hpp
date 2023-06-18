@@ -12,11 +12,19 @@ class EncryptCaesar {
         ~EncryptCaesar(); // Destructor
 
         void encrypt(const std::string &plain_text);     
-        void decrypt(const std::string &user_key);
+        std::string decrypt(const std::string &user_key);
+        
+        void keyHash();
+
+        void writeToFile(const std::vector<int> &ciphertext);
+        void readFromFile();
 
     private:
         std::string key_;
+        std::string key_hash_;
         std::string plain_text_;
+        std::string file_path_;
+       
     };
 
 #endif
