@@ -25,11 +25,11 @@ void EncryptCaesar::encrypt() {
     sum %= 128; //ensure no overflow+valid ascii range
     auto ascii_txt = std::make_unique<std::vector<int>>(StringOps::StringToAscii(plain_text_));
     for (auto itr = ascii_txt->begin(); itr != ascii_txt->end(); ++itr) {
-        *itr = (*itr + sum) % 95 + 32;
+        *itr = ((*itr + sum - 32) % 95) + 32;
     }       
 
     key_hash_ = keyHash(key_); //hashes key, stores in key_hash_
-    std::cout << "encrypt: " << key_hash_ << std::endl;
+    
     //write everything to file
     //std::string tmp = Generators::UniqueFile(".bin"); design error,tbd fix
     //file_path_ = "tmp.bin";
@@ -54,12 +54,11 @@ std::string EncryptCaesar::decrypt(const std::string &user_key) {
 
     auto ascii_txt = std::make_unique<std::vector<int>>(readFromFile());
     for (auto itr = ascii_txt->begin(); itr != ascii_txt->end(); ++itr) {
-        *itr = (*itr - sum + 95) % 95 + 32; //ensure printable ascii and prevents negative values
+        *itr = ((*itr - sum - 32 + 95) % 95) + 32; //ensure printable ascii and prevents negative values
     }       
 
     key_hash_check_ = keyHash(user_key);
-    std::cout << key_hash_check_ <<std::endl;
-    std::cout << key_hash_ << std::endl;
+
 
     if (key_hash_check_ != key_hash_) {
         throw std::runtime_error("Incorrect key. Please try again");
