@@ -7,11 +7,21 @@ int main(int argc, char* argv[]) {
     std::string key;
     std::string message;
 
+    // Ugly but lets the user input spaces in the message
     for (int i = 1; i < argc; i++) {
-        if (std::string(argv[i]) == "-k" && i + 1 < argc) {
+        std::string current_arg = argv[i];
+
+        if (current_arg == "-k" && i + 1 < argc) {
             key = argv[++i];
-        } else if (std::string(argv[i]) == "-m" && i + 1 < argc) {
-            message = argv[++i];
+        } else if (current_arg == "-m" && i + 1 < argc) {
+            i++;
+            while (i < argc && std::string(argv[i]) != "-k") {
+                if (!message.empty()) {
+                    message += " ";
+                }
+                message += argv[i++];
+            }
+            i--;  // Move back the index to correctly process next argument
         } else {
             std::cerr << "Usage: " << argv[0] << " -k <key> -m <message>\n";
             return 1;
