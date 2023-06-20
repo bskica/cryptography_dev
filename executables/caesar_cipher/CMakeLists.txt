@@ -7,8 +7,6 @@ add_executable(${TARGET_DECRYPT} caesar_decrypt.cpp)
 target_link_libraries(${TARGET_ENCRYPT} PUBLIC CAESAR_LIB)
 target_link_libraries(${TARGET_DECRYPT} PUBLIC CAESAR_LIB)
 
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/src")
-
 
 install(TARGETS ${TARGET_ENCRYPT} ${TARGET_DECRYPT}
         RUNTIME DESTINATION release)

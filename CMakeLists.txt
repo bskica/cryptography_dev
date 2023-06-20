@@ -17,7 +17,6 @@ else()
 endif()
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install")
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/src")
 
 include_directories(inc)
 add_subdirectory(libs)
