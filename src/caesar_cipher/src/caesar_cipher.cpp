@@ -3,6 +3,7 @@
 #include <memory>
 #include <sstream>
 #include <iomanip>
+#include <cstdio>
 
 #include <openssl/evp.h>
 
@@ -56,6 +57,10 @@ std::string EncryptCaesar::decrypt(const std::string &user_key) {
     for (auto itr = ascii_txt->begin(); itr != ascii_txt->end(); ++itr) {
         *itr = ((*itr - sum - 32 + 95) % 95) + 32; //ensure printable ascii and prevents negative values
     }       
+
+    if (std::remove(file_path_.c_str()) != 0) {
+        throw std::runtime_error("Failed to delete the file.");
+    }
 
     key_hash_check_ = keyHash(user_key);
 
