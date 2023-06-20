@@ -8,22 +8,22 @@
 
 class EncryptCaesar {
     public:
-        EncryptCaesar(std::string key, std::string plain_text); // Constructor
-        ~EncryptCaesar(); // Destructor
+        EncryptCaesar(std::string key, std::string plain_text = ""); // Constructor
 
-        void encrypt(const std::string &plain_text);     
-        std::string decrypt(const std::string &user_key);
+        void encrypt(); // rolled all encryption ops into this     
+        std::string decrypt(const std::string &user_key); // handles all decryption, returns decrypted file contents
         
-        void keyHash();
+        std::string keyHash(const std::string &key);  // hashes key for storage
 
         void writeToFile(const std::vector<int> &ciphertext);
-        void readFromFile();
+        std::vector<int> readFromFile();
 
     private:
         std::string key_;
         std::string key_hash_;
+        std::string key_hash_check_;
         std::string plain_text_;
-        std::string file_path_;
+        std::string file_path_ = "tmp.bin";
        
     };
 
