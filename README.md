@@ -1,6 +1,6 @@
 # Cryptography_Dev 
 
-This repo serves as a learning implementation of various cryptography concepts.
+This repo contains various cryptographic CLI utilities.
 
 
 ## Build Instructions
